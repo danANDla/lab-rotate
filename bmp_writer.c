@@ -35,10 +35,7 @@ enum write_status to_bmp(FILE* out, struct image const* img) {
     //fseek(out, header.bOffBits, SEEK_SET); // or just fseek(out, 0, SEEK_CUR);
 
     uint8_t blank = 0;
-    for (size_t j = 0; j < calculate_padding(img->width); ++j) {
-        if (!fwrite(&blank, sizeof(uint8_t), 1, out)) return WRITE_PADDING_ERROR;
-    }
-    for (size_t i = 0; i < header.biHeight-1; ++i) {
+    for (size_t i = 0; i < header.biHeight; ++i) {
         /*if (!write_string(i, &header, img, out)) return WRITE_STRING_ERROR;*/
         void* pos = img->pixels + img->width * i;
         if(!fwrite(pos, sizeof(struct pixel) * img->width, 1, out)) return WRITE_STRING_ERROR;
@@ -46,7 +43,5 @@ enum write_status to_bmp(FILE* out, struct image const* img) {
             if (!fwrite(&blank, sizeof(uint8_t), 1, out)) return WRITE_PADDING_ERROR;
         }
     }
-    void* pos = img->pixels + img->width * (header.biHeight - 1);
-    if (!fwrite(pos, sizeof(struct pixel) * img->width, 1, out)) return WRITE_STRING_ERROR;
     return WRITE_OK;
 }
