@@ -1,13 +1,13 @@
 #include "file_io.h"
 
 enum file_status open_r_file(const char *const fname, FILE** const file) {
-	*file = fopen(fname, "r");
+	*file = fopen(fname, "rb");
 	if (*file == NULL) return READ_FILE_ERROR;
 	return READ_FILE_OK;
 }
 
 enum file_status open_w_file(const char* const fname, FILE** const file) {
-	*file = fopen(fname, "w");
+	*file = fopen(fname, "wb");
 	if (*file == NULL) return WRITE_FILE_ERROR;
 	return WRITE_FILE_OK;
 }

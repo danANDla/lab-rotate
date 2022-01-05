@@ -1,8 +1,8 @@
 #include"lib.h"
 
 int main() {
-	char* fname1 = "./tests/image2.bmp";
-	char* fname2 = "./tests/image2res.bmp";
+	char* fname1 = "./tests/image1.bmp";
+	char* fname2 = "./tests/image1res.bmp";
 	char* fname3 = "./tests/image1resres.bmp";
 
 	FILE* source;
