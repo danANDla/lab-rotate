@@ -1,7 +1,7 @@
 #ifndef BMP_READER_H
 #define BMP_READER_H
 #include "bmp_header.h"
-#include "image.h"
+#include "../image/image.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>

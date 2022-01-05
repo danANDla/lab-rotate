@@ -1,6 +1,6 @@
 #ifndef BMP_WRITER_H
 #define BMP_WRITER_H
-#include "image.h"
+#include "../image/image.h"
 #include "bmp_header.h"
 #include <stdlib.h>
 #include <stdio.h>
