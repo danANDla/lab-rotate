@@ -7,7 +7,7 @@ enum file_status open_r_file(const char *const fname, FILE** const file) {
 }
 
 enum file_status open_w_file(const char* const fname, FILE** const file) {
-	*file = fopen(fname, "wb");
+	*file = fopen(fname, "w");
 	if (*file == NULL) return WRITE_FILE_ERROR;
 	return WRITE_FILE_OK;
 }

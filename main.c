@@ -34,14 +34,14 @@ int main(int args, char **argv) {
             break;
     }
     close_file(source);
-
+    struct image transformed = create_image(new_image.width,new_image.height);
+    transform_image(&new_image, &transformed, CLOCKWISE_90);
     FILE *result;
     if (open_w_file(fname2, &result) != WRITE_FILE_OK) {
         printf("smth wrong\n");
         return 1;
     }
-
-    switch (to_bmp(result, &new_image)) {
+    switch (to_bmp(result, &transformed)) {
         case WRITE_STRING_ERROR:
             printf("write string error\n");
         case WRITE_HEADER_ERROR:
@@ -54,5 +54,6 @@ int main(int args, char **argv) {
             break;
     }
     close_file(result);
+
     return 0;
 }
