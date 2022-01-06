@@ -20,8 +20,8 @@ int main(int args, char **argv) {
         printf("smth wrong with opening a file\n");
         return 1;
     }
-    struct image new_image;
-    switch (from_bmp(source, &new_image)) {
+    struct image src_image;
+    switch (from_bmp(source, &src_image)) {
         case READ_INVALID_HEADER:
             printf("invalid header\n");
             break;
@@ -34,8 +34,11 @@ int main(int args, char **argv) {
             break;
     }
     close_file(source);
-    struct image transformed = create_image(new_image.width,new_image.height);
-    transform_image(&new_image, &transformed, CLOCKWISE_90);
+    struct image transformed = create_image(src_image.width,src_image.height);
+    transform_image(&src_image, &transformed, CLOCKWISE_90);
+    //transform_image(&transformed, &src_image, CLOCKWISE_90);
+    //transform_image(&src_image, &transformed, CLOCKWISE_90);
+    //transform_image(&transformed, &src_image, CLOCKWISE_90);
     FILE *result;
     if (open_w_file(fname2, &result) != WRITE_FILE_OK) {
         printf("smth wrong\n");

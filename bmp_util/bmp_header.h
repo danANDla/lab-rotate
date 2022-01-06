@@ -2,7 +2,6 @@
 #define BMP_HEADER_H
 #include <stdint.h>
 
-
 struct __attribute__((packed)) bmp_header
 {
     uint16_t bfType;    
@@ -21,7 +20,6 @@ struct __attribute__((packed)) bmp_header
     uint32_t biClrUsed;
     uint32_t biClrImportant;
 };
-
 
 void print_header(const struct bmp_header* const header);
 

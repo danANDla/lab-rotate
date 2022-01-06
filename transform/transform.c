@@ -1,9 +1,9 @@
 #include "transform.h"
 
 static bool clock90(struct image* img, const struct image* source){
-    for(size_t i = 0; i < source->width; ++i){
+    for(size_t i = 0; i < source->width; ++i) {
         for (int j = 0; j < source->height; ++j) {
-            img->pixels[i*source->height+j] = source->pixels[source->width-1-i+source->width*j];
+            img->pixels[(i * source->height) + j] = source->pixels[source->width - 1 - i + source->width * j];
         }
     }
 

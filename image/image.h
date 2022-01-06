@@ -3,8 +3,7 @@
 #include "../bmp_util/bmp_header.h"
 #include <stdlib.h>
 #include <stdint.h>
-
-struct image {
+struct __attribute__((packed)) image {
 	uint64_t width, height;
 	struct pixel* pixels;
 };
