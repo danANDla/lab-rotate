@@ -32,11 +32,8 @@ enum write_status to_bmp(FILE* out, struct image const* img) {
     fill_header(&header, img);
     print_header(&header);
     if(!write_header(&header, out)) return WRITE_HEADER_ERROR;
-    //fseek(out, header.bOffBits, SEEK_SET); // or just fseek(out, 0, SEEK_CUR);
-
     uint8_t blank = 0;
     for (size_t i = 0; i < header.biHeight; ++i) {
-        /*if (!write_string(i, &header, img, out)) return WRITE_STRING_ERROR;*/
         void* pos = img->pixels + img->width * i;
         if(!fwrite(pos, sizeof(struct pixel) * img->width, 1, out)) return WRITE_STRING_ERROR;
         for (size_t j = 0; j < calculate_padding(img->width); ++j) {

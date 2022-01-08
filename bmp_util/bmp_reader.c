@@ -29,18 +29,6 @@ enum read_status from_bmp(FILE* in, struct image* img) {
     const uint8_t offset = calculate_padding(new_header.biWidth);
 
     fseek(in, new_header.bOffBits, SEEK_SET);
-//    for (size_t i = 0; i < new_header.biHeight; i++) {
-//        void* pos = img->pixels + img->width * i;
-//        if (!fread(pos, sizeof(struct pixel) , new_header.biWidth, in)) return READ_INVALID_BITS;
-//        fseek(in, offset, SEEK_CUR);
-//    }
-
-//    for (size_t i = new_header.biHeight-1; i > 0; i--) {
-//        void* pos = img->pixels + img->width * i;
-//        if (!fread(pos, sizeof(struct pixel) , new_header.biWidth, in)) return READ_INVALID_BITS;
-//        fseek(in, offset, SEEK_CUR);
-//    }
-
     for (size_t i = 0; i < new_header.biHeight; i++) {
         void* pos = img->pixels + img->width * i;
         if (!fread(pos, sizeof(struct pixel) , new_header.biWidth, in)) return READ_INVALID_BITS;

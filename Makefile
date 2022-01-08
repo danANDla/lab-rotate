@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall
 LDFLAGS = 
 OBJFILES = image.o bmp_writer.o bmp_reader.o file_io.o transform.o main.o
-TARGET = bmp_rotator
+TARGET = image-transformer
 
 all: $(TARGET)
 
@@ -27,4 +27,4 @@ file_io.o: file_io/file_io.c
 transform.o: transform/transform.c
 	$(CC) -g -O -c $<
 clean:
-	rm -f $(OBJFILES) 
+	rm -f $(OBJFILES)

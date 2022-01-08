@@ -1,9 +1,6 @@
 #include"lib.h"
 
 int main(int args, char **argv) {
-//	char* fname1 = "./tests/image1.bmp";
-//	char* fname2 = "./tests/image1res.bmp";
-//	char* fname3 = "./tests/image1resres.bmp";
     if (args < 3) {
         printf("too few arguments\n");
         return 0;
@@ -17,46 +14,43 @@ int main(int args, char **argv) {
 
     FILE *source;
     if (open_r_file(fname1, &source) != READ_FILE_OK) {
-        printf("smth wrong with opening a file\n");
+        printf("Can't open the file %s\n", fname1);
         return 1;
     }
     struct image src_image;
     switch (from_bmp(source, &src_image)) {
         case READ_INVALID_HEADER:
-            printf("invalid header\n");
+            printf("Invalid bmp header\n");
             break;
         case READ_INVALID_BITS:
-            printf("invalid bits\n");
+            printf("Invalid bits in bitmap\n");
             break;
         case READ_OK:
-            printf("read succses\n");
+            printf("Read success\n");
         default:
             break;
     }
     close_file(source);
-    struct image transformed = create_image(src_image.width,src_image.height);
-    transform_image(&src_image, &transformed, CLOCKWISE_90);
-    //transform_image(&transformed, &src_image, CLOCKWISE_90);
-    //transform_image(&src_image, &transformed, CLOCKWISE_90);
-    //transform_image(&transformed, &src_image, CLOCKWISE_90);
+    struct transform_result transformed = transform_image(&src_image,  COUNTERCLOCKWISE_90);
     FILE *result;
     if (open_w_file(fname2, &result) != WRITE_FILE_OK) {
-        printf("smth wrong\n");
+        printf("Can't open the file %s\n", fname2);
         return 1;
     }
-    switch (to_bmp(result, &transformed)) {
+    switch (to_bmp(result, &transformed.img)) {
         case WRITE_STRING_ERROR:
-            printf("write string error\n");
+            printf("Error in writing a row of the output bitmap\n");
         case WRITE_HEADER_ERROR:
-            printf("write header error\n");
+            printf("Error in writing a header of the output bitmap\n");
         case WRITE_PADDING_ERROR:
-            printf("write padding error\n");
+            printf("Error in writing a padding of the output bitmap\n");
         case WRITE_ERROR:
-            printf("write error\n");
+            printf("Error in writing file\n");
+        case WRITE_OK:
+            printf("Write success\n");
         default:
             break;
     }
     close_file(result);
-
     return 0;
 }
